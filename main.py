@@ -39,7 +39,7 @@ def insert_includes(includes_path, include_file, special_includes, template_file
                 lines = f.readlines()
                 for line in lines:
                     # Find the <li> for the page we're building and mark it as the active one
-                    include_html += line.replace('<li id="'+template_file+'">', '<li id="'+template_file+'" class="active">')
+                    include_html += line.replace('<li><a href="'+template_file+'">', '<li class="active"><a href="'+template_file+'">')
     else:
         with open(includes_path + include_file) as f:
             include_html = f.read()
