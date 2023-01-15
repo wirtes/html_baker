@@ -1,0 +1,7 @@
+{
+  "_comment": "Load your html_baker configs here & name file 'config.json' ",
+  "working_directory": "full path to working directory",
+  "src_path": "relative path to source templates from working directory",
+  "includes_path": "relative path to include templates from working directory",
+  "special_includes": ["a list of special includes templates that require addition processing. There's a hook in the function. Code exceptions here."]
+}

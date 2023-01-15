@@ -4,9 +4,9 @@ import json
 
 
 def load_configs():
-    secrets_file = open('config/secrets.json')
-    secrets = json.load(secrets_file)
-    return secrets
+    config_file = open('config/config.json')
+    config = json.load(config_file)
+    return config
 
 
 def get_html_files(directory):
@@ -61,22 +61,17 @@ def process_template(file_to_open):
 
 
 if __name__ == '__main__':
-    working_directory = '/Users/wirtes/Code/larrymellman.com/'
+    config = load_configs()
+    working_directory = config["working_directory"]
     output_path = working_directory
-
-    src_path = working_directory + 'src/'
-    includes_path = src_path + 'includes/'
+    src_path = working_directory + config["src_path"]
+    includes_path = src_path + config["includes_path"]
     templates_to_process = get_html_files(src_path)
     print(templates_to_process)
 
     for template in templates_to_process:
-        # List of "special" includes which require complex include logic
-        special_includes = ['nav.html']
-
-        # filename = working_directory + 'src/index.html'
         file_to_open = src_path + template
         file_to_write = output_path + template
-
         print("=== Processing: " + file_to_open)
         with open(file_to_open) as file:
             output_html = ''
@@ -84,9 +79,8 @@ if __name__ == '__main__':
                 if line.startswith("<!--PREPROCESS_INCLUDE-->"):
                     # Split the preprocess comment & grab the filename of the include (after the colon)
                     include_file = line.split(":")[1].rstrip()
-                    # include_filename = includes_path + include_file
                     print("Including: " + includes_path + include_file)
-                    output_html += insert_includes(includes_path, include_file, special_includes, template)
+                    output_html += insert_includes(includes_path, include_file, config["special_includes"], template)
                 else:
                     output_html += line
             write_html(file_to_write, output_html)
