@@ -1,5 +1,13 @@
 
 import os
+import json
+
+
+def load_configs():
+    secrets_file = open('config/secrets.json')
+    secrets = json.load(secrets_file)
+    return secrets
+
 
 def get_html_files(directory):
     html_templates = []
