@@ -4,7 +4,7 @@ import json
 
 
 def load_configs():
-    config_file = open('config/config.json')
+    config_file = open('/Users/wirtes/PycharmProjects/html_baker/config/config.json')
     config = json.load(config_file)
     return config
 
@@ -67,12 +67,12 @@ if __name__ == '__main__':
     src_path = working_directory + config["src_path"]
     includes_path = src_path + config["includes_path"]
     templates_to_process = get_html_files(src_path)
-    print(templates_to_process)
+    # print(templates_to_process)
 
     for template in templates_to_process:
         file_to_open = src_path + template
         file_to_write = output_path + template
-        print("=== Processing: " + file_to_open)
+        print("=== Processing Template: " + file_to_open)
         with open(file_to_open) as file:
             output_html = ''
             for line in file:
